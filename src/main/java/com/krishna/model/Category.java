@@ -16,29 +16,30 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Entity
-@Table(name="users")
 @NoArgsConstructor
-@Getter
 @Setter
+@Getter
+@Entity
+@Table(name="categories")
+public class Category {
 
-public class User {
-	
-//	@GeneratedValue(strategy = GenerationType.AUTO)
-	
+	//@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="my_entity_seq_gen")
-    @SequenceGenerator(name="my_entity_seq_gen", sequenceName="my_entity_seq", allocationSize=1, initialValue=1020)
-	private int id;
+	@GeneratedValue(strategy=GenerationType.IDENTITY, generator="cat_seq_gen")
+    @SequenceGenerator(name="cat_seq_gen", sequenceName="seq", allocationSize=1, initialValue=1020)
+	@Column(name="id")
+	private Integer categoryId;
+
 	
-	@Column(name="username",nullable = false,length = 100)
-	private String name;
-	private String email;
-	private String password;
-	private String about;
+	@Column(name="title" , length=100,nullable = false)
+	private String categoryTitle;
+	
+	@Column(name="description",nullable = false)
+	private String categoryDescription;
 	
 	
-	@OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
+	@OneToMany(mappedBy = "category",cascade = CascadeType.ALL)
 	private List<Post> posts=new ArrayList<>();
 	
 }
+	
