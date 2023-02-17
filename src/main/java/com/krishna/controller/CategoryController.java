@@ -62,9 +62,9 @@ public class CategoryController {
 	
 	
 	@GetMapping("/")
-	public ResponseEntity<List<Category>> getCategories(){
+	public ResponseEntity<List<CategoryDto>> getCategories(){
 		
-		List<Category> categories= this.categoryService.getCategories();
+		List<CategoryDto> categories = this.categoryService.getCategories();
 		return ResponseEntity.ok(categories);
 	}
 	

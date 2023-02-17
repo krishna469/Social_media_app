@@ -21,10 +21,7 @@ public class CategoryServiceImpl implements CategoryService {
 	
 	@Autowired
 	private ModelMapper modelMapper;
-	
-	@Autowired
-	private CategoryRepository repo;
-	
+		
 	@Override
 	public CategoryDto createCategory(CategoryDto categoryDto) {
 		
@@ -38,8 +35,6 @@ public class CategoryServiceImpl implements CategoryService {
 	public CategoryDto updateCategory(CategoryDto categoryDto, Integer categoryId) {
 		
 		Category cat= this.categoryRepository.findById(categoryId).orElseThrow(()-> new ResourceNotFoundException("Category ", "Category Id", categoryId));
-		
-//		Category updatedCat=this.modelMapper.map(cat, CategoryDto);
 		
 		cat.setCategoryTitle(categoryDto.getCategoryTitle());
 		
@@ -68,26 +63,13 @@ public class CategoryServiceImpl implements CategoryService {
 
 
 	@Override
-	public List<Category> getCategories() {
-		// TODO Auto-generated method stub
-
-		List<Category> categories= repo.findAll();
-		System.err.println("cat"+categories);
+	public List<CategoryDto> getCategories() {
 		
-//		List<CategoryDto> catDtos=categories.stream().map((cat)->this.modelMapper.map(categories, CategoryDto.class)).collect(Collectors.toList());
+		List<Category> categories = this.categoryRepository.findAll();
+				
+		List<CategoryDto> catDtos=categories.stream().map((cat)->this.modelMapper.map(cat, CategoryDto.class)).collect(Collectors.toList());
 		
-		return categories;
-		
-		
-//		@Override
-//		public List<CategoryDto> getCategories() {
-//			// TODO Auto-generated method stub
-//
-//			List<Category> categories= this.categoryRepository.findAll();
-//			List<CategoryDto> catDtos=categories.stream().map((cat)->this.modelMapper.map(categories, CategoryDto.class)).collect(Collectors.toList());
-//			
-//			return catDtos;
-//		}
+		return catDtos;
 
 	}
 

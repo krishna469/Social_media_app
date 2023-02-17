@@ -20,7 +20,7 @@ public interface CategoryService {
 	CategoryDto getCategory(Integer categoryId);
 	
 	//getAll
-	List<Category> getCategories();
+	List<CategoryDto> getCategories();
 	
 	
 	
